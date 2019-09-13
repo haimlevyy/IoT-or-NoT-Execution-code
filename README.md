@@ -14,3 +14,11 @@ For each one of those scripts:
 ```bash
 python <script-name>.py
 ```
+### Example:
+There is an example included with sample-data.
+The sample-data files are:
+- sample_oracle.csv
+- pcap2features/dhcp_fdb.csv
+- pcap2features/tmp_pcap_fdb.csv
+- pcap2features/features/*
+- classifiers/_set_tmp.csv
