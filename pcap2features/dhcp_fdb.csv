@@ -1,0 +1,8 @@
+slot_id,slot_width,mac,desc,isiot,dhcp_len,hostname,vendor_class_id,request_params,max_dhcp-size,msg_type,client_id
+0,0,f4:f5:e8:57:86:a6,Chromecast,1,5,'Chromecast','dhcpcd-5.2.10:Linux-3.8.13+:armv7l:Marvell Berlin SoC (Flattened Device Tree)',1; 3; 6; 33; 15; 51; 58; 59; 28,'1500','1'; '3','None'
+0,0,08:62:66:b2:82:d4,Asus ZenPad,0,1,'android-bdc3613cb244e6d9','dhcpcd-5.5.6',1; 3; 6; 33; 15; 51; 58; 59; 28,'1500','3','\x01\x08bf\xb2\x82\xd4'
+0,0,e0:94:67:31:ab:f0,lenovo laptop,0,3,'Computer','MSFT 5.0',1; 3; 6; 33; 249; 43; 44; 46; 15; 119; 121; 47; 252; 31,'None','3','\x01\xe0\x94g1\xab\xf0'
+0,0,dc:0b:34:f2:20:42,LG G3,0,13,'android-16cb7d9344894616','android-dhcp-7.1.2',1; 3; 6; 43; 15; 51; 26; 59; 28; 58,'1500','1'; '3','\x01\xdc\x0b4\xf2 B'
+0,0,34:e6:ad:29:64:8b,Dell laptop,0,27,'User','MSFT 5.0',1; 3; 6; 33; 249; 43; 44; 46; 15; 119; 121; 47; 252; 31,'None','1'; '3','\x014\xe6\xad)d\x8b'
+0,0,ac:af:b9:77:ad:66,Galaxy-A7-2017,0,1,'Galaxy-A7-2017','android-dhcp-8.0.0',1; 3; 6; 43; 15; 51; 26; 59; 28; 58,'1500','3','\x01\xac\xaf\xb9w\xadf'
+0,0,5c:70:a3:61:5a:04,nexus 5x,0,5,'None','android-dhcp-8.1.0',1; 3; 6; 43; 15; 51; 26; 59; 28; 58,'1500','1'; '3','\x01\\p\xa3aZ\x04'
