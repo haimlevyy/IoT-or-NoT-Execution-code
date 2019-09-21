@@ -46,15 +46,20 @@ def make_dicts(data):
 
 
 def process(devs, dhcp_dict):
+    tn, fp, fn, tp = 0, 0, 0, 0
     rp20 = []
     print "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
     print "Final Classification: (device classification by majority for all slots)"
 
     for k, dev in devs.items():
-        #rp20.append(ratio_process_20(dev, dhcp_dict))
-        rp20.append(ng_ratio_process_20(dev, dhcp_dict))
+        res, tn, fp, fn, tp = ratio_process_20(dev, dhcp_dict, tn, fp, fn, tp)
+        rp20.append(res)
 
-    print "Success Classification Rate: (for all tested slots):", avg(rp20)
+    print "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+    print 'Total results for combined classification'
+    print 'f1-score', float(2 * tp) / (2 * tp + fn + fp) * 100
+    print 'recall', float(tp) / (tp + fn) * 100
+    print 'precision', float(tp) / (tp + fp) * 100
     print "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
 
 
@@ -69,7 +74,7 @@ def isiot_helper(num_isiot):
         return "IoT"
 
 
-def ng_ratio_process_20(dev, dhcp_dict):
+def ratio_process_20(dev, dhcp_dict, tn, fp, fn, tp):
     # for 20 i have 7, so, at least 4
     res = []
     for i20 in xrange(len(dev.set20)):
@@ -103,12 +108,20 @@ def ng_ratio_process_20(dev, dhcp_dict):
             ratio.append(0)
 
     avg_res = avg(ratio)
-#    print dev.name, avg_res
+    #print dev.name, avg_res
     if avg_res >= 0.5:
         print dev.name, "classified as:", isiot_helper(dev.isiot)
+        if dev.isiot == 1:
+            tp += 1
+        else:
+            tn += 1
     else:
         print dev.name, "classified as:", isiot_helper(1 - dev.isiot)
-    return avg_res
+        if dev.isiot == 1:
+            fn += 1
+        else:
+            fp += 1
+    return avg_res, tn, fp, fn, tp
 
 
 def combiner(dhcp_dict):
