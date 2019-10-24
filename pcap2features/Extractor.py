@@ -36,7 +36,7 @@ OUT_DHCP_FDB_PATH = "./dhcp_fdb.csv"
 def main():
     ## The script will also creates the file "tmp_pcap_fdb.csv" as part of it's running.
     ## You may delete it after the script ends or examine it (this file contains the extracted features).
-    pcap2fdb(PCAPS, ORACLE, "tmp_pcap_fdb.csv") 
+    pcap2fdb(PCAPS, ORACLE, "tmp_pcap_fdb.csv")
     fdb2features(ORACLE, "./tmp_pcap_fdb.csv", OUT_FOLDER_PATH)
     dhcp2fdb(PCAPS, ORACLE, OUT_DHCP_FDB_PATH)
 

@@ -17,10 +17,12 @@ class Activator(object):
         writer = LogWriter(outfile, oracle)
         self.pcaps = pcaps
 
-        slot = SlotCache(oracle, writer)
+        slot = SlotCache(oracle, writer, False)
+        slot_accu = SlotCache(oracle, writer, True)
 
         self.pcap_reader = PcapReader(self.pcaps[0], 'udp port 67')
         self.pcap_reader.add_cacher(slot)
+        self.pcap_reader.add_cacher(slot_accu)
 
     def process(self):
         print 'reading:', self.pcaps[0]

@@ -53,7 +53,8 @@ class PcapReader(object):
 
 
 class SlotCache(object):
-    def __init__(self, oracle, writer):
+    def __init__(self, oracle, writer, accumulate):
+        self.accumulate = accumulate
         self.slot_id = 0
         self._oracle = oracle
         self._dev_fea = DevFeatures.copy_from_devdata(oracle)
@@ -64,10 +65,22 @@ class SlotCache(object):
             raise AssertionError('Wrong Writer Type')
 
     def __del__(self):
-        self._writer.log_record(self.slot_id, self._dev_fea)
+        if not self.accumulate:
+            self._writer.log_record(self.slot_id, 0, self._dev_fea)
+        else:
+            self._writer.log_record(self.slot_id, 1, self._dev_fea)
         return
 
     def add(self, ts, pack):
+        if self.slot_id == 0:
+            self.slot_id = ts
+        if not self.accumulate:
+            self._writer.log_record(self.slot_id, 0, self._dev_fea)  # # call writer
+            self.slot_id = ts
+            del self._dev_fea
+            self._dev_fea = DevFeatures.copy_from_devdata(self._oracle)
+            self._dev_fea = FeatureExtractor().extract_feas(self._dev_fea, ts, pack)
+            return
         self._dev_fea = FeatureExtractor().extract_feas(self._dev_fea, ts, pack)
         pass
 
@@ -97,8 +110,8 @@ class LogWriter(object):
         head += add('client_id') + '\n'
         self._fl.write(head)
 
-    def log_record(self, slot_id, packs):
-        record = self._make_records(slot_id, 0, packs)
+    def log_record(self, slot_id, slot_width, packs):
+        record = self._make_records(slot_id, slot_width, packs)
         self._fl.write(record)
 
     def _make_records(self, slot_id, slot_width, devs_fea):

@@ -22,7 +22,7 @@ class DHCPClassifier:
 
         for dev in oracle.values():
             X, y = [], []
-            dps = get_dev_sw_slots(dhcp_records, dev, 0)
+            dps = get_dev_sw_slots(dhcp_records, dev, 1)
             for dp in dps:
                 labels = self.prepare_vector(dp.hostname, dp.vendor_class, dp.req_lst, dp.mds, dp.msg_t)
                 X.append(labels)

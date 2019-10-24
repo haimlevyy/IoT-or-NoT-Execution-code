@@ -1,4 +1,7 @@
 import math
+from OnDemandDHCPClassifier import OnDemandDHCPClassifier
+import base_libs.Base
+from base_libs.Base import *
 
 
 class PredictionSets:
@@ -45,14 +48,14 @@ def make_dicts(data):
     return devs
 
 
-def process(devs, dhcp_dict):
+def process(devs, database, on_demand_classifier):
     tn, fp, fn, tp = 0, 0, 0, 0
     rp20 = []
     print "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
     print "Final Classification: (device classification by majority for all slots)"
 
     for k, dev in devs.items():
-        res, tn, fp, fn, tp = ratio_process_20(dev, dhcp_dict, tn, fp, fn, tp)
+        res, tn, fp, fn, tp = ratio_process_20(dev, database, on_demand_classifier, tn, fp, fn, tp)
         rp20.append(res)
 
     print "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
@@ -74,9 +77,22 @@ def isiot_helper(num_isiot):
         return "IoT"
 
 
-def ratio_process_20(dev, dhcp_dict, tn, fp, fn, tp):
+def get_dev_lst(name, database):
+    for k, v in database.notf.items():
+        if name in k:
+            return v
+    for k, v in database.iotf.items():
+        if name in k:
+            return v
+    return None
+
+
+def ratio_process_20(dev, database, on_demand_classifier, tn, fp, fn, tp):
     # for 20 i have 7, so, at least 4
     res = []
+    dev_lst = get_dev_lst(dev.name, database)
+    dev_lst = [r for r in dev_lst if r.sw == 1200]
+
     for i20 in xrange(len(dev.set20)):
         i10 = i20 * 2
         i5 = i20 * 4
@@ -93,12 +109,14 @@ def ratio_process_20(dev, dhcp_dict, tn, fp, fn, tp):
                 elem += 1
 
         ## enrich with dhcp;
-        dhcp = []
-        for k, v in dhcp_dict.items():
-            if k.replace(':', '-') in dev.name:
-                dhcp = [v]*2
-                break
-        res.append(float(classi + sum(dhcp)) / (elem + len(dhcp)))
+        od_dhcp = on_demand_classifier.classify(dev.name, dev_lst[i20].slot_id, 1200)
+        if od_dhcp is None:
+            # there is no dhcp data
+            res.append(float(classi) / elem)
+        else:
+            # there is dhcp data
+            dhcp = [od_dhcp] * 2
+            res.append(float(classi + sum(dhcp)) / (elem + len(dhcp)))
 
     ratio = []
     for r in res:
@@ -124,11 +142,13 @@ def ratio_process_20(dev, dhcp_dict, tn, fp, fn, tp):
     return avg_res, tn, fp, fn, tp
 
 
-def combiner(dhcp_dict):
+def combiner(on_demand_classifier, features):
     fn = "_sets_tmp.csv"
     fl = open(fn, 'r')
     data = fl.read()
     fl.close()
     devs = make_dicts(data)
-    process(devs, dhcp_dict)
+    database = DeviceBase(features)
+
+    process(devs, database, on_demand_classifier)
 
