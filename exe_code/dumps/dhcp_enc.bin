@@ -1,0 +1,198 @@
+ccopy_reg
+_reconstructor
+p0
+(csklearn.preprocessing._encoders
+OneHotEncoder
+p1
+c__builtin__
+object
+p2
+Ntp3
+Rp4
+(dp5
+S'_categorical_features'
+p6
+S'all'
+p7
+sS'categories_'
+p8
+(lp9
+cnumpy.core.multiarray
+_reconstruct
+p10
+(cnumpy
+ndarray
+p11
+(I0
+tp12
+S'b'
+p13
+tp14
+Rp15
+(I1
+(L56L
+tp16
+cnumpy
+dtype
+p17
+(S'O8'
+p18
+I0
+I1
+tp19
+Rp20
+(I3
+S'|'
+p21
+NNNI-1
+I-1
+I63
+tp22
+bI00
+(lp23
+S'mds: 576'
+p24
+aS'mds: none'
+p25
+aS'mds:1500'
+p26
+aS'mds:1520'
+p27
+aS'mds:576'
+p28
+aS'mds:none'
+p29
+aS'prl: 119'
+p30
+aS'prl: 12'
+p31
+aS'prl: 121'
+p32
+aS'prl: 13'
+p33
+aS'prl: 15'
+p34
+aS'prl: 17'
+p35
+aS'prl: 2'
+p36
+aS'prl: 26'
+p37
+aS'prl: 28'
+p38
+aS'prl: 3'
+p39
+aS'prl: 31'
+p40
+aS'prl: 33'
+p41
+aS'prl: 40'
+p42
+aS'prl: 41'
+p43
+aS'prl: 42'
+p44
+aS'prl: 43'
+p45
+aS'prl: 44'
+p46
+aS'prl: 46'
+p47
+aS'prl: 47'
+p48
+aS'prl: 51'
+p49
+aS'prl: 54'
+p50
+aS'prl: 58'
+p51
+aS'prl: 59'
+p52
+aS'prl: 6'
+p53
+aS'prl: 66'
+p54
+aS'prl: 67'
+p55
+aS'prl: 69'
+p56
+aS'prl: 81'
+p57
+aS'prl: 95'
+p58
+aS'prl: none'
+p59
+aS'prl:1'
+p60
+aS'prl:none'
+p61
+aS'vci:'
+p62
+aS'vci: udhcp '
+p63
+aS'vci:android-dhcp-'
+p64
+aS'vci:armvl'
+p65
+aS'vci:dhcpcd-'
+p66
+aS'vci:emlab'
+p67
+aS'vci:flattened device tree'
+p68
+aS'vci:googlewifi'
+p69
+aS'vci:honeywell'
+p70
+aS'vci:invoxia'
+p71
+aS'vci:linux-'
+p72
+aS'vci:marvell berlin soc '
+p73
+aS'vci:msft '
+p74
+aS'vci:none'
+p75
+aS'vci:triby'
+p76
+aS'vci:udhcp '
+p77
+aS'vci:udhcp --lsdk-'
+p78
+aS'vci:udhcp -pre'
+p79
+atp80
+basS'dtype'
+p81
+cnumpy
+float64
+p82
+sS'_categories'
+p83
+S'auto'
+p84
+sS'categorical_features'
+p85
+NsS'n_values'
+p86
+NsS'_legacy_mode'
+p87
+I00
+sS'_n_values'
+p88
+g84
+sS'_sklearn_version'
+p89
+S'0.20.3'
+p90
+sS'sparse'
+p91
+I01
+sS'handle_unknown'
+p92
+S'ignore'
+p93
+sS'categories'
+p94
+Nsb.
